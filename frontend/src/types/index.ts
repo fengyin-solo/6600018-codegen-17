@@ -28,3 +28,38 @@ export interface VariantChar {
   modern: string
   frequency: number
 }
+
+export type TaskStatus = 'pending' | 'assigned' | 'in_progress' | 'completed'
+
+export interface ReviewTask {
+  id: string
+  title: string
+  documentId: string
+  chapter?: string
+  resultIds: string[]
+  assignee?: string
+  status: TaskStatus
+  createdAt: string
+  completedAt?: string
+}
+
+export interface ReviewTaskCreate {
+  title: string
+  documentId: string
+  chapter?: string
+  resultIds: string[]
+  assignee?: string
+}
+
+export interface ReviewTaskUpdate {
+  assignee?: string
+  status?: TaskStatus
+}
+
+export interface TaskProgress {
+  total: number
+  pending: number
+  assigned: number
+  inProgress: number
+  completed: number
+}
