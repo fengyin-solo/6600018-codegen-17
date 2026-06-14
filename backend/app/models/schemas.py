@@ -35,9 +35,16 @@ class TaskStatus(str, Enum):
     completed = "completed"
 
 
+class TaskScopeType(str, Enum):
+    whole_document = "whole_document"
+    chapter = "chapter"
+    selected_results = "selected_results"
+
+
 class ReviewTaskCreate(BaseModel):
     title: str
     document_id: str
+    scope_type: TaskScopeType = TaskScopeType.whole_document
     chapter: Optional[str] = None
     result_ids: List[str] = []
     assignee: Optional[str] = None
@@ -47,8 +54,10 @@ class ReviewTask(BaseModel):
     id: str
     title: str
     document_id: str
+    scope_type: TaskScopeType = TaskScopeType.whole_document
     chapter: Optional[str] = None
     result_ids: List[str] = []
+    result_count: int = 0
     assignee: Optional[str] = None
     status: TaskStatus = TaskStatus.pending
     created_at: str
@@ -66,3 +75,5 @@ class TaskProgress(BaseModel):
     assigned: int
     in_progress: int
     completed: int
+    total_results: int
+    completed_results: int

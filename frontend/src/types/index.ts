@@ -31,12 +31,16 @@ export interface VariantChar {
 
 export type TaskStatus = 'pending' | 'assigned' | 'in_progress' | 'completed'
 
+export type TaskScopeType = 'document' | 'chapter' | 'results'
+
 export interface ReviewTask {
   id: string
   title: string
   documentId: string
+  scopeType: TaskScopeType
   chapter?: string
   resultIds: string[]
+  resultCount: number
   assignee?: string
   status: TaskStatus
   createdAt: string
@@ -46,6 +50,7 @@ export interface ReviewTask {
 export interface ReviewTaskCreate {
   title: string
   documentId: string
+  scopeType: TaskScopeType
   chapter?: string
   resultIds: string[]
   assignee?: string
@@ -62,4 +67,6 @@ export interface TaskProgress {
   assigned: number
   inProgress: number
   completed: number
+  totalResults: number
+  completedResults: number
 }
